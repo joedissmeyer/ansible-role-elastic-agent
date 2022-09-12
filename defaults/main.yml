@@ -1,0 +1,6 @@
+---
+elastic_agent_version: '8.4.1'
+agent_download_source: https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-{{ elastic_agent_version }}-linux-x86_64.tar.gz
+fleet_server_insecure: true
+fleet_server_host: elk-fleet-server
+fleet_server_port: 8220

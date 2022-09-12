@@ -1,0 +1,26 @@
+---
+- name: Download Elastic Agent
+  get_url:
+    url: "{{ agent_download_source }}"
+    dest: /tmp
+
+- name: Extract gzip
+  unarchive:
+    src: /tmp/elastic-agent-{{ elastic_agent_version }}-linux-x86_64.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Run installer
+  shell:
+    cmd: ./elastic-agent install --url=https://{{ fleet_server_host }}.{{ GXI_ENV }}.ocean.com:{{ fleet_server_port }} --enrollment-token={{ elastic_agent_enrollment_token }} --insecure -f
+    chdir: /tmp/elastic-agent-{{ elastic_agent_version }}-linux-x86_64
+
+- name: Cleanup downloaded file
+  file:
+    path: /tmp/elastic-agent-{{ elastic_agent_version }}-linux-x86_64.tar.gz
+    state: absent
+
+- name: Cleanup extract directory
+  file:
+    path: /tmp/elastic-agent-{{ elastic_agent_version }}-linux-x86_64
+    state: absent
