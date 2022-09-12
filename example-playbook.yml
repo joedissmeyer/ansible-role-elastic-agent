@@ -1,0 +1,20 @@
+# Running this playbook:
+#
+# ansible-playbook -i myinventory example-playbook.yml
+#
+# NOTES:
+#   - Enrolls an agent into a Fleet managed server.
+#   - Requires an enrollment token that is mapped to an agent policy.
+
+- hosts: all
+  name: Install Elastic Agent
+  become: yes
+  gather_facts: True
+  tags:
+    - agent
+  roles:
+  - role: joedissmeyer.ansible_role_elastic_agent
+  vars:
+    elastic_agent_version: "8.4.1"
+    elastic_agent_enrollment_token: 'my_very_long_enrollment_token'
+    fleet_server_host: 10.10.10.123
