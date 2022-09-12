@@ -12,7 +12,7 @@
 
 - name: Run installer
   shell:
-    cmd: ./elastic-agent install --url=https://{{ fleet_server_host }}.{{ GXI_ENV }}.ocean.com:{{ fleet_server_port }} --enrollment-token={{ elastic_agent_enrollment_token }} --insecure -f
+    cmd: ./elastic-agent install --url=https://{{ fleet_server_host }}:{{ fleet_server_port }} --enrollment-token={{ elastic_agent_enrollment_token }} --insecure -f
     chdir: /tmp/elastic-agent-{{ elastic_agent_version }}-linux-x86_64
 
 - name: Cleanup downloaded file
